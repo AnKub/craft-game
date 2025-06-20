@@ -1,0 +1,24 @@
+@import '../../styles/variables';
+
+.indicator {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 18px;
+  margin-top: 16px;
+  text-align: center;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+
+  .rolls {
+    font-weight: bold;
+  }
+
+  .timer {
+    margin-top: 6px;
+    font-size: 16px;
+    color: #ffd700;
+  }
+}

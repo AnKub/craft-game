@@ -1,0 +1,39 @@
+@use '../../styles/variables' as *;
+
+
+.dice {
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  border-radius: 12px;
+  border: 2px solid #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  &.rolling {
+    animation: spin 1s ease;
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(180deg); }
+  50% { transform: rotate(720deg); }
+  100% { transform: rotate(1080deg); }
+}
+
+.face {
+  width: 60px;
+  height: 60px;
+  user-select: none;
+  pointer-events: none;
+}
