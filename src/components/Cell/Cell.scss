@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $cell-bg;
+  border: 1px solid $border-color;
+  position: relative;
+  font-size: 0.7rem;
+  text-align: center;
+  transition: 0.2s;
+  cursor: pointer;
+
+  &.empty {
+    background: transparent;
+    border: none;
+    pointer-events: none;
+  }
+
+  &.active:hover {
+    background-color: $cell-hover;
+    transform: scale(1.05);
+  }
+
+  .label {
+    pointer-events: none;
+    color: $text-color;
+  }
+}
