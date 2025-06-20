@@ -35,9 +35,11 @@ const App = () => {
       <div className="game-wrapper">
         <Board />
         <Player position={position} />
-        <Dice onRoll={() => {}} disabled={true} />
-        <RollButton onClick={handleRoll} disabled={!canRoll || rollsLeft === 0} />
-        <Indicator rollsLeft={rollsLeft} cooldown={30} onReady={handleCooldownEnd} />
+        <div className="center-content">
+          <Dice value={diceValue} />
+          <RollButton onClick={handleRoll} disabled={!canRoll || rollsLeft === 0} />
+          <Indicator rollsLeft={rollsLeft} cooldown={30} onReady={handleCooldownEnd} />
+        </div>
       </div>
     </div>
   )
