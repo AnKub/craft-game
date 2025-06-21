@@ -1,7 +1,6 @@
 import type { CellType } from '../../types/types'
 import './Cell.scss'
 
-// Імпортуємо як звичайні імпорти
 import start from '../../assets/icons/start.svg'
 import startOn from '../../assets/icons/startOn.svg'
 import cash from '../../assets/icons/cash.svg'
