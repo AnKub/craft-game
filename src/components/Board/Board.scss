@@ -1,28 +1,43 @@
+.board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 100px;
+}
+.board-container h1 {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 16px;
+  text-align: center;
+}
 .board {
+  width: 100%;
+  height: 100%;
   display: grid;
-grid-template-columns: repeat(6, 1fr); // якщо 6x6
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  gap: 0;
-  justify-content: center;
-  align-items: center;
-  background-color: #111;
-  padding: 20px;
-  border-radius: 12px;
-  margin: 0 auto;
+  gap: 2px;
+  border: 2px solid #444;
+  background-color: #1a1a1a;
+  border-radius: 8px;
 }
 
-.cell,
 .empty-cell {
-  width: 80px;
-  height: 80px;
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.game-wrapper {
+.dice-value-display {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.bottom-ui {
+  margin-top: 16px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh; 
 }

@@ -8,16 +8,17 @@ import './Board.scss'
 type Props = {
   rollsLeft: number
   onRoll: (value: number) => void
+  position: number
 }
 
 const cellTypes: CellType[] = [
-  'Start', 'Cash', 'VIP', 'Box', 'Gold', 'Pickaxe',
-  'Star', '', '', '', '', 'Truck',
-  'Dice', '', '', '', '', 'Star',
-  'VIP', '', '', '', '', 'Cash',
-  'Truck', '', '', '', '', 'Gold',
-  'Box', '', '', '', '', 'Pickaxe',
-  'Dice', 'Cash', 'VIP', 'Box', 'Gold', 'Start'
+  'start', 'cash', 'vip', 'box', 'gold', 'pickaxe',
+  'star', '', '', '', '', 'truck',
+  'dice', '', '', '', '', 'star',
+  'vip', '', '', '', '', 'cash',
+  'truck', '', '', '', '', 'gold',
+  'box', '', '', '', '', 'pickaxe',
+  'dice', 'cash', 'vip', 'box', 'gold', 'start'
 ]
 
 const perimeterIndexes = [
@@ -35,21 +36,17 @@ const perimeterIndexes = [
 
 const centerIndexes = [14, 15, 20, 21]
 
-const Board = ({ rollsLeft, onRoll }: Props) => {
+const Board = ({ rollsLeft, onRoll, position }: Props) => {
   const [isRolling, setIsRolling] = useState(false)
   const [diceValue, setDiceValue] = useState(1)
-  const [position, setPosition] = useState(0)
 
-const handleDiceRoll = (val: number) => {
-  setDiceValue(val)
-
-  setTimeout(() => {
-    setPosition(prev => (prev + val) % perimeterIndexes.length)
-    onRoll(val)  
-    setIsRolling(false)
-  }, 1000) 
-}
-
+  const handleDiceRoll = (val: number) => {
+    setDiceValue(val)
+    setTimeout(() => {
+      onRoll(val)
+      setIsRolling(false)
+    }, 1000)
+  }
 
   const handleRollClick = () => {
     if (isRolling || rollsLeft <= 0) return
@@ -59,36 +56,34 @@ const handleDiceRoll = (val: number) => {
   return (
     <div className="board-container">
       <div className="board">
-              {Array.from({ length: 36 }).map((_, i) => {
-          const indexInPerimeter = perimeterIndexes.indexOf(i)
+       {Array.from({ length: 36 }).map((_, i) => {
+  const perimeterIndex = perimeterIndexes.indexOf(i)
 
-          if (indexInPerimeter !== -1) {
-            const type = cellTypes[indexInPerimeter]
-            const isActive = indexInPerimeter === position
-            return <Cell key={i} type={type} active={isActive} />
-          }
+  if (perimeterIndex !== -1) {
+    const type = cellTypes[perimeterIndex] 
+  const isActive = i === position
+    return <Cell key={i} type={type} active={isActive} />
+  }
 
-          const isCenter = centerIndexes.includes(i)
+  const isCenter = centerIndexes.includes(i)
 
-          return (
-            <div key={i} className="empty-cell">
-              {isCenter && i === 14 && (
-                <Dice
-                  onRoll={handleDiceRoll}
-                  disabled={!isRolling}
-                />
-              )}
-             {isCenter && i === 15 && (
-                <div className="dice-value-display">
-                  {isRolling ? 'Rolling...' : `You rolled: ${diceValue}`}
-                </div>
-              )}
-            </div>
-          )
-        })}
+  return (
+    <div key={i} className="empty-cell">
+      {isCenter && i === 14 && (
+        <Dice onRoll={handleDiceRoll} disabled={!isRolling} />
+      )}
+      {isCenter && i === 15 && (
+        <div className="dice-value-display">
+          {isRolling ? 'Rolling...' : `🎲 ${diceValue}`}
+        </div>
+      )}
+    </div>
+  )
+})}
+
       </div>
 
-      <div className="dice-controls">
+      <div className="bottom-ui">
         <RollButton
           onClick={handleRollClick}
           disabled={isRolling || rollsLeft <= 0}

@@ -13,8 +13,8 @@ import gold from '../../assets/icons/gold.svg'
 import goldOn from '../../assets/icons/goldOn.svg'
 import star from '../../assets/icons/star.svg'
 import starOn from '../../assets/icons/starOn.svg'
-import pickaxe from '../../assets/icons/material.svg'
-import pickaxeOn from '../../assets/icons/materialOn.svg'
+import pickaxe from '../../assets/icons/pickaxe.svg'
+import pickaxeOn from '../../assets/icons/pickaxeOn.svg'
 import truck from '../../assets/icons/truck.svg'
 import truckOn from '../../assets/icons/truckOn.svg'
 import dice from '../../assets/icons/dice.svg'
@@ -47,16 +47,18 @@ type Props = {
 }
 
 const Cell = ({ type, active = false }: Props) => {
-  const base = type.toLowerCase()
+  const base = type.toLowerCase?.() ?? ''
   const icon = icons[base]
   const iconOn = icons[`${base}On`]
-
+console.log('Rendering cell', { type, active, icon, iconOn })
+  if (!icon) {
+    console.warn(`No icon found for cell type: ${type}`)
+    return <div className={`cell ${base}`}></div>
+  }
   return (
-  <div className={`cell ${base} ${active ? 'active' : ''}`}>
+ <div className={`cell ${base} ${active ? 'active' : ''}`}>
       {!active && icon && <img src={icon} alt={type} className="icon-base" draggable={false} />}
-{active && iconOn && (
-  <img src={iconOn} alt={`${type} active`} className="icon-on" draggable={false} />
-)}
+      {active && iconOn && <img src={iconOn} alt={`${type} active`} className="icon-on" draggable={false} />}
     </div>
   )
 }

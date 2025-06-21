@@ -1,14 +1,13 @@
 export type CellType =
-  | 'Start'
-  | 'Cash'
-  | 'VIP'
-  | 'Box'
-  | 'Gold'
-  | 'Star'
-  | 'Pickaxe'
-  | 'Truck'
-  | 'Dice'
-  | 'Finish'  
+  | 'start'
+  | 'cash'
+  | 'vip'
+  | 'box'
+  | 'gold'
+  | 'star'
+  | 'pickaxe'
+  | 'truck'
+  | 'dice'
   | ''
 
 

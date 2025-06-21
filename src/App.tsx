@@ -1,6 +1,5 @@
 import './styles/main.scss'
 import Board from './components/Board/Board'
-import Player from './components/Player/Player'
 import Indicator from './components/Indicator/Indicator'
 
 import { useState } from 'react'
@@ -12,7 +11,7 @@ const App = () => {
   const handleMove = (value: number) => {
     const newPos = (position + value) % 20
     setPosition(newPos)
-    setRollsLeft((prev) => prev - 1)
+    setRollsLeft(prev => prev - 1)
   }
 
   const handleCooldownEnd = () => {
@@ -22,19 +21,9 @@ const App = () => {
   return (
     <div className="app">
       <div className="game-wrapper">
-        <Board
-          rollsLeft={rollsLeft}
-          onRoll={handleMove}
-        />
-        <Player position={position} />
-        <div className="center-content">
-          <Indicator
-            rollsLeft={rollsLeft}
-            cooldown={30}
-            onReady={handleCooldownEnd}
-          />
-        </div>
+        <Board rollsLeft={rollsLeft} onRoll={handleMove} position={position} />
       </div>
+      <Indicator rollsLeft={rollsLeft} cooldown={30} onReady={handleCooldownEnd} />
     </div>
   )
 }

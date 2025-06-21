@@ -5,19 +5,20 @@
   position: relative;
   overflow: hidden;
   height: 0;
-  padding-bottom: 100%; // квадрат
-  background-color: #111;
+  padding-bottom: 100%;
+
   transition: background-color 0.3s;
-  border-radius: 10px; // або $radius якщо використовуєш змінну
+  border-radius: 10px; 
 
   .icon-base,
   .icon-on {
     position: absolute;
-    width: 70%;
-    height: 70%;
+  width: 90%;
+  height: 90%;
+  top: 5%;
+  left: 5%;
     object-fit: contain;
-    top: 15%;
-    left: 15%;
+  
   }
 
   .icon-on {
