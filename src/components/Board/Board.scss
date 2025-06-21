@@ -1,17 +1,28 @@
-@use '../../styles/variables' as *;
-
 .board {
-  width: 500px;
-  height: 500px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  gap: 2px;
+grid-template-columns: repeat(6, 1fr); // якщо 6x6
+  grid-template-rows: repeat(6, 1fr);
+  gap: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: #111;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 0 auto;
 }
 
-.cell.center {
+.cell,
+.empty-cell {
+  width: 80px;
+  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
 
+.game-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
 }

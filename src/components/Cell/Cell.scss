@@ -1,5 +1,3 @@
-@use '../../styles/variables' as *;
-
 .cell {
   display: flex;
   align-items: center;
@@ -10,9 +8,8 @@
   padding-bottom: 100%; // квадрат
   background-color: #111;
   transition: background-color 0.3s;
+  border-radius: 10px; // або $radius якщо використовуєш змінну
 
-
-  
   .icon-base,
   .icon-on {
     position: absolute;

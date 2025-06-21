@@ -13,8 +13,8 @@ import gold from '../../assets/icons/gold.svg'
 import goldOn from '../../assets/icons/goldOn.svg'
 import star from '../../assets/icons/star.svg'
 import starOn from '../../assets/icons/starOn.svg'
-import pickaxe from '../../assets/icons/pickaxe.svg'
-import pickaxeOn from '../../assets/icons/pickaxeOn.svg'
+import pickaxe from '../../assets/icons/material.svg'
+import pickaxeOn from '../../assets/icons/materialOn.svg'
 import truck from '../../assets/icons/truck.svg'
 import truckOn from '../../assets/icons/truckOn.svg'
 import dice from '../../assets/icons/dice.svg'
@@ -52,11 +52,11 @@ const Cell = ({ type, active = false }: Props) => {
   const iconOn = icons[`${base}On`]
 
   return (
-    <div className={`cell ${base} ${active ? 'active' : ''}`}>
-      {icon && <img src={icon} alt={type} className="icon-base" draggable={false} />}
-      {active && iconOn && (
-        <img src={iconOn} alt={`${type} active`} className="icon-on" draggable={false} />
-      )}
+  <div className={`cell ${base} ${active ? 'active' : ''}`}>
+      {!active && icon && <img src={icon} alt={type} className="icon-base" draggable={false} />}
+{active && iconOn && (
+  <img src={iconOn} alt={`${type} active`} className="icon-on" draggable={false} />
+)}
     </div>
   )
 }
