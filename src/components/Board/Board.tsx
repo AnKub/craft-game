@@ -1,31 +1,31 @@
-
 import Cell from '../Cell/Cell'
 import Player from '../Player/Player'
-import Dice from '../Dice/Dice'
 import './Board.scss'
 
-const cellTypes = [
+const perimeterTypes = [
   'start', 'cash', 'vip', 'box', 'gold', 'pickaxe',
-  'star', '', '', '', '', 'truck',
-  'dice', '', '', '', '', 'star',
-  'vip', '', '', '', '', 'cash',
-  'truck', '', '', '', '', 'gold',
-  'box', '', '', '', '', 'pickaxe',
-  'dice', 'cash', 'vip', 'box', 'gold', 'start'
+  'star', 'vip', 'box', 'gold', 'pickaxe', 'star',
+  'vip', 'box', 'gold', 'pickaxe', 'star', 'vip',
+  'box', 'gold', 'pickaxe', 'star', 'vip', 'box'
+  
 ]
 
-const perimeterIndexes = [
-  0, 1, 2, 3, 4, 5,
-  11,
-  17,
-  23,
-  29,
-  35, 34, 33, 32, 31, 30,
-  24,
-  18,
-  12,
-  6
-]
+
+function generateBoardGrid(size = 6, types: string[]) {
+  const grid: string[][] = Array.from({ length: size }, () => Array(size).fill(''))
+  let idx = 0
+ 
+  for (let i = 0; i < size; i++) grid[0][i] = types[idx++]
+
+  for (let i = 1; i < size - 1; i++) grid[i][size - 1] = types[idx++]
+
+  for (let i = size - 1; i >= 0; i--) grid[size - 1][i] = types[idx++]
+
+  for (let i = size - 2; i > 0; i--) grid[i][0] = types[idx++]
+  return grid
+}
+
+const boardGrid = generateBoardGrid(6, perimeterTypes)
 
 type BoardProps = {
   position: number
@@ -34,27 +34,39 @@ type BoardProps = {
   dice: React.ReactNode
 }
 
-const Board = ({ position, onCellEffect, isMoving, dice}: BoardProps) => {
+const Board = ({ position, onCellEffect, isMoving, dice }: BoardProps) => {
+
+  let perimeterPositions: [number, number][] = []
+  for (let i = 0; i < 6; i++) perimeterPositions.push([0, i])
+  for (let i = 1; i < 5; i++) perimeterPositions.push([i, 5])
+  for (let i = 5; i >= 0; i--) perimeterPositions.push([5, i])
+  for (let i = 4; i > 0; i--) perimeterPositions.push([i, 0])
+
   return (
     <div className="board">
-      {Array.from({ length: 36 }).map((_, i) => {
-        const perimeterIndex = perimeterIndexes.indexOf(i)
-        const type = perimeterIndex !== -1 ? cellTypes[perimeterIndex] : ''
-        const isActive = perimeterIndex === position
-
-        return (
-          <div key={i} className="board-cell">
-            <Cell
-              type={type}
-              active={isActive}
-              onEffect={() => onCellEffect(perimeterIndex)}
-            >
-              {isActive && <Player isMoving={isMoving} />}
-            </Cell>
-          </div>
-        )
-      })}
-       <div className="board-dice-center">{dice}</div>
+      {boardGrid.map((row, rowIdx) =>
+        row.map((type, colIdx) => {
+        
+          const perimeterIndex = perimeterPositions.findIndex(
+            ([r, c]) => r === rowIdx && c === colIdx
+          )
+          const isActive = perimeterIndex === position
+          return (
+            <div key={`${rowIdx}-${colIdx}`} className="board-cell">
+              <Cell
+                type={type}
+                active={isActive}
+                onEffect={() => onCellEffect(perimeterIndex)}
+              >
+                {isActive && <Player isMoving={isMoving} />}
+              </Cell>
+            </div>
+          )
+        })
+      )}
+      <div className="board-dice-center"> <div className="dice-bg" />
+  {dice}
+</div>
     </div>
   )
 }

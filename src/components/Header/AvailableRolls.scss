@@ -1,0 +1,45 @@
+.available-rolls {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 8px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.rolls-label {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  .rolls-count {
+    font-weight: 700;
+    margin-left: 8px;
+  }
+}
+
+.rolls-bar-bg {
+  width: 100%;
+  height: 10px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 2px 0 0 0;
+}
+
+.rolls-bar {
+  height: 100%;
+  background: #ffd600;
+  border-radius: 6px;
+  transition: width 0.3s;
+}
+
+.rolls-timer {
+  color: #ffd600;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 2px;
+}

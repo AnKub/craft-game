@@ -1,35 +1,24 @@
-.roll-button {
-   background: linear-gradient(to right, #6DBF1D, #498013);
-  color: white;
+@use '../../styles/variables.scss' as *;
+
+.roll-btn {
+  width: 100%;
+  max-width: 80vw;
+  padding: 14px 0;
+  font-size: 1.3rem;
+  background: $primary-color;
+  color: $text-light;
   border: none;
-  min-width: 348px;
-  min-height: 48px;
-  padding: 12px 24px;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
-  &:hover:not(:disabled) {
-  background: linear-gradient(to right, #76cc22, #3f7010);
-    transform: scale(1.05);
+  font-weight: 700;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 0;
+  &:active {
+    background: $primary-hover;
+    transform: scale(0.97);
   }
-
   &:disabled {
-    opacity: 0.5;
+    background: #bdbdbd;
     cursor: not-allowed;
-  }
-
-
-  @media (max-width: 600px) {
-    padding: 10px 20px;
-    font-size: 16px;
-  }
-
-  @media (min-width: 1200px) {
-    padding: 14px 28px;
-    font-size: 20px;
   }
 }

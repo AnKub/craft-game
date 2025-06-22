@@ -1,39 +1,45 @@
 @use '../../styles/variables' as *;
 
-
 .dice {
-  width: 40px;
-  height: auto;
-  background-color: #fff;
-  border-radius: 12px;
-  border: 2px solid #333;
+  width: 84px;
+  height: 84px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-
-  &.rolling {
-    animation: spin 1s ease;
-  }
-
-  &.disabled {
-    opacity: 0.4;
-    pointer-events: none;
-  }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  20% { transform: rotate(180deg); }
-  50% { transform: rotate(720deg); }
-  100% { transform: rotate(1080deg); }
-}
-
-.face {
-  width: 60px;
-  height: 60px;
   user-select: none;
-  pointer-events: none;
+  transition: box-shadow 0.2s;
+  border-radius: 16px;
+  
+  box-shadow: 0 2px 8px #0004;
+  &:active {
+    box-shadow: 0 0 0 2px #00bfa6;
+  }
+  &.rolling .dice-img {
+    animation: dice-spin 0.7s cubic-bezier(0.4,0,0.2,1);
+  }
+}
+
+.dice-img {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  display: block;
+}
+
+@keyframes dice-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(360deg) scale(1.15); }
+  100% { transform: rotate(720deg) scale(1); }
+}
+
+@media (max-width: 600px) {
+  .dice {
+    width: 48px;
+    height: 48px;
+  }
+  .dice-img {
+    width: 40px;
+    height: 40px;
+  }
 }

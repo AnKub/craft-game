@@ -1,30 +1,23 @@
+@use '../../styles/variables.scss' as *;
+
 .indicator {
-  color: #fff;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-size: 18px;
-  margin-top: 16px;
-  text-align: center;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: $primary-color;
+  background: $cell-bg;
+  border-radius: 12px;
+  padding: 8px 20px;
+  margin-bottom: 0;
+  box-shadow: 0 2px 8px #0002;
+}
 
-  .rolls {
-    font-weight: bold;
-  }
-
-  .timer {
-    margin-top: 6px;
-    font-size: 16px;
-    color: #ffd700;
-  }
-
-  @media (max-width: 600px) {
-    font-size: 16px;
-
-    .timer {
-      font-size: 14px;
-    }
-  }
+.indicator .timer {
+  color: $warning;
+  font-size: 1rem;
+  margin-left: 8px;
 }

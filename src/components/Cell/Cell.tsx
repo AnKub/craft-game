@@ -38,7 +38,7 @@ const Cell = ({ type, active, onEffect, children }: CellProps) => {
       onClick={onEffect}
     >
       <Tooltip text={type}>
-        <img src={icons[type]} alt={type} draggable={false} />
+      <img src={icons[type]} alt={type} draggable={false} className="cell-bg-img" />
       </Tooltip>
       {children}
     </div>
