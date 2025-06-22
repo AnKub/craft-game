@@ -1,7 +1,7 @@
 @use '../../styles/variables.scss' as *;
 
 .header {
-  width: 100vw;
+  width: 98vw;
   min-height: 64px;
   background: $primary;
   color: $text-light;
@@ -18,7 +18,9 @@
 }
 
 .game-header {
-  width: 100vw;
+  width: 100%;
+
+  margin: 0 auto;
   min-height: 56px;
   background: transparent;
   display: flex;
@@ -34,38 +36,39 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1 1 auto;
+  gap: 0.5rem;
   font-size: 1.5rem;
   font-weight: 700;
   color: #fff;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-align: center;
-  gap: 8px;
   pointer-events: none;
 }
 
 .header-logo {
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   display: inline-block;
 }
 
 .header-btn {
-  background: rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.3); 
+  backdrop-filter: blur(8px);
   border: none;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 46px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background 0.2s;
   z-index: 2;
-  img {
-    width: 20px;
-    height: 20px;
-  }
+  color:$text-color;
+  padding: 2px 6px;
+  font-weight: 600;
+  font-size: 1rem;
+
   &.left {
     margin-right: 8px;
   }

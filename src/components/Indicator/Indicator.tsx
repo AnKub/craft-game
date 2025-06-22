@@ -3,7 +3,7 @@ import './Indicator.scss'
 
 type IndicatorProps = {
   rollsLeft: number
-  cooldown: number // seconds
+  cooldown: number 
   onReady: () => void
 }
 
