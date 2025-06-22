@@ -1,42 +1,38 @@
 import { useEffect, useState } from 'react'
 import './Indicator.scss'
 
-type Props = {
+type IndicatorProps = {
   rollsLeft: number
-  cooldown: number
+  cooldown: number // seconds
   onReady: () => void
 }
 
-const Indicator = ({ rollsLeft, cooldown, onReady }: Props) => {
-  const [timeLeft, setTimeLeft] = useState(cooldown)
+const Indicator = ({ rollsLeft, cooldown, onReady }: IndicatorProps) => {
+  const [timer, setTimer] = useState(cooldown)
 
   useEffect(() => {
     if (rollsLeft > 0) return
-
     const interval = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
+      setTimer((t) => {
+        if (t <= 1) {
           clearInterval(interval)
           onReady()
-          return 0
+          return cooldown
         }
-        return prev - 1
+        return t - 1
       })
     }, 1000)
-
     return () => clearInterval(interval)
-  }, [rollsLeft])
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60).toString().padStart(2, '0')
-    const s = (seconds % 60).toString().padStart(2, '0')
-    return `${m}:${s}`
-  }
+  }, [rollsLeft, cooldown, onReady])
 
   return (
     <div className="indicator">
-      <div className="rolls">🎲 Rolls Left: {rollsLeft}</div>
-      {rollsLeft === 0 && <div className="timer">⏳ {formatTime(timeLeft)}</div>}
+      <span>🎲 {rollsLeft}</span>
+      {rollsLeft === 0 && (
+        <span className="timer">
+          {new Date(timer * 1000).toISOString().substr(11, 8)}
+        </span>
+      )}
     </div>
   )
 }

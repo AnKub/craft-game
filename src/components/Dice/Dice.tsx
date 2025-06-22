@@ -1,48 +1,39 @@
 import { useState } from 'react'
 import './Dice.scss'
 
-import Face1 from '../../assets/dice/1.svg'
-import Face2 from '../../assets/dice/2.svg'
-import Face3 from '../../assets/dice/3.svg'
-import Face4 from '../../assets/dice/4.svg'
-import Face5 from '../../assets/dice/5.svg'
-import Face6 from '../../assets/dice/6.svg'
 
-type Props = {
+
+import dice1 from '../../assets/dice/1.svg'
+import dice2 from '../../assets/dice/2.svg'
+import dice3 from '../../assets/dice/3.svg'
+import dice4 from '../../assets/dice/4.svg'
+import dice5 from '../../assets/dice/5.svg'
+import dice6 from '../../assets/dice/6.svg'
+
+const diceImages = [dice1, dice2, dice3, dice4, dice5, dice6]
+type DiceProps = {
   onRoll: (value: number) => void
   disabled: boolean
 }
 
-const diceFaces = [Face1, Face2, Face3, Face4, Face5, Face6]
-
-const Dice = ({ onRoll, disabled }: Props) => {
+const Dice = ({ onRoll, disabled }: DiceProps) => {
   const [rolling, setRolling] = useState(false)
   const [value, setValue] = useState(1)
 
   const handleRoll = () => {
-    if (rolling || disabled) return
-
+    if (disabled || rolling) return
     setRolling(true)
     const newValue = Math.floor(Math.random() * 6) + 1
-
     setTimeout(() => {
       setValue(newValue)
-      onRoll(newValue)
       setRolling(false)
-    }, 1000)
+      onRoll(newValue)
+    }, 700)
   }
 
   return (
-    <div
-      className={`dice ${rolling ? 'rolling' : ''} ${disabled ? 'disabled' : ''}`}
-      onClick={handleRoll}
-    >
-      <img
-        src={diceFaces[value - 1]}
-        alt={`Dice face ${value}`}
-        className="face"
-        draggable={false}
-      />
+    <div className={`dice${rolling ? ' rolling' : ''}`} onClick={handleRoll}>
+    <img src={diceImages[value - 1]} alt={`dice-${value}`} />
     </div>
   )
 }

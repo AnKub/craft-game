@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #2a2a2a;
+  color: white;
+  font-size: 1.2rem;
+
+  &__logo {
+    font-weight: bold;
+  }
+
+  &__stats {
+    display: flex;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 1rem;
+  }
+}

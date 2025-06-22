@@ -1,17 +1,14 @@
-
 import './RollButton.scss'
 
-type Props = {
+type RollButtonProps = {
   onClick: () => void
   disabled: boolean
 }
 
-const RollButton = ({ onClick, disabled }: Props) => {
-  return (
-    <button className="roll-button" onClick={onClick} disabled={disabled}>
-      Roll
-    </button>
-  )
-}
+const RollButton = ({ onClick, disabled }: RollButtonProps) => (
+  <button className="roll-btn" onClick={onClick} disabled={disabled}>
+    Roll
+  </button>
+)
 
 export default RollButton

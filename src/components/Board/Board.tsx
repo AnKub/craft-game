@@ -1,17 +1,10 @@
-import { useState } from 'react'
-import type { CellType } from '../../types/types'
+
 import Cell from '../Cell/Cell'
+import Player from '../Player/Player'
 import Dice from '../Dice/Dice'
-import RollButton from '../RollButton/RollButton'
 import './Board.scss'
 
-type Props = {
-  rollsLeft: number
-  onRoll: (value: number) => void
-  position: number
-}
-
-const cellTypes: CellType[] = [
+const cellTypes = [
   'start', 'cash', 'vip', 'box', 'gold', 'pickaxe',
   'star', '', '', '', '', 'truck',
   'dice', '', '', '', '', 'star',
@@ -34,61 +27,34 @@ const perimeterIndexes = [
   6
 ]
 
-const centerIndexes = [14, 15, 20, 21]
+type BoardProps = {
+  position: number
+  onCellEffect: (index: number) => void
+  isMoving: boolean
+  dice: React.ReactNode
+}
 
-const Board = ({ rollsLeft, onRoll, position }: Props) => {
-  const [isRolling, setIsRolling] = useState(false)
-  const [diceValue, setDiceValue] = useState(1)
-
-  const handleDiceRoll = (val: number) => {
-    setDiceValue(val)
-    setTimeout(() => {
-      onRoll(val)
-      setIsRolling(false)
-    }, 1000)
-  }
-
-  const handleRollClick = () => {
-    if (isRolling || rollsLeft <= 0) return
-    setIsRolling(true)
-  }
-
+const Board = ({ position, onCellEffect, isMoving, dice}: BoardProps) => {
   return (
-    <div className="board-container">
-      <div className="board">
-       {Array.from({ length: 36 }).map((_, i) => {
-  const perimeterIndex = perimeterIndexes.indexOf(i)
+    <div className="board">
+      {Array.from({ length: 36 }).map((_, i) => {
+        const perimeterIndex = perimeterIndexes.indexOf(i)
+        const type = perimeterIndex !== -1 ? cellTypes[perimeterIndex] : ''
+        const isActive = perimeterIndex === position
 
-  if (perimeterIndex !== -1) {
-    const type = cellTypes[perimeterIndex] 
-  const isActive = i === position
-    return <Cell key={i} type={type} active={isActive} />
-  }
-
-  const isCenter = centerIndexes.includes(i)
-
-  return (
-    <div key={i} className="empty-cell">
-      {isCenter && i === 14 && (
-        <Dice onRoll={handleDiceRoll} disabled={!isRolling} />
-      )}
-      {isCenter && i === 15 && (
-        <div className="dice-value-display">
-          {isRolling ? 'Rolling...' : `🎲 ${diceValue}`}
-        </div>
-      )}
-    </div>
-  )
-})}
-
-      </div>
-
-      <div className="bottom-ui">
-        <RollButton
-          onClick={handleRollClick}
-          disabled={isRolling || rollsLeft <= 0}
-        />
-      </div>
+        return (
+          <div key={i} className="board-cell">
+            <Cell
+              type={type}
+              active={isActive}
+              onEffect={() => onCellEffect(perimeterIndex)}
+            >
+              {isActive && <Player isMoving={isMoving} />}
+            </Cell>
+          </div>
+        )
+      })}
+       <div className="board-dice-center">{dice}</div>
     </div>
   )
 }
