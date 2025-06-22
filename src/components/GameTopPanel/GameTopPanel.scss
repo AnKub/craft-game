@@ -1,7 +1,25 @@
-.available-rolls {
+.game-top-panel {
   width: 100%;
   max-width: 340px;
   margin: 0 auto 8px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.roll-craft-title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 12px 0 4px 0;
+  letter-spacing: 1px;
+}
+
+.available-rolls {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

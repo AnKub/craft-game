@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Header from './components/Header/Header'
+import GameTopPanel from './components/GameTopPanel/GameTopPanel'
 import Board from './components/Board/Board'
 import Dice from './components/Dice/Dice'
 import Indicator from './components/Indicator/Indicator'
@@ -32,8 +33,7 @@ function App() {
   return (
     <div className="app">
    <Header />
-<RollCraftTitle />
-<AvailableRolls rolls={7} maxRolls={10} timer="00:29:09" />
+   <GameTopPanel rolls={7} maxRolls={10} timer="00:29:09" />
       <main className="main-content">
         <div className="game-area">
           <Board
